@@ -27,8 +27,9 @@ int main() {
         for (int col = 0; col < COL; col++) {
             float x = col * REST_DISTANCE + WIDTH/3;
             float y = row * REST_DISTANCE + HEIGHT/3;
+            sf::Vector2f accelration = sf::Vector2f(0, GRAVITY);
             bool pinned = (row == 0);
-            particles.emplace_back(x, y, pinned);
+            particles.emplace_back(x, y, accelration, pinned);
         }
     }
 
@@ -60,7 +61,6 @@ int main() {
 
         //apply gravity and update particles
         for (auto& particle : particles) {
-            particle.apply_force(sf::Vector2f(0, GRAVITY));
             particle.update(TIME_STEP);
             particle.constrain_to_bounds(WIDTH, HEIGHT);
         }
