@@ -26,6 +26,11 @@ public:
         float difference = (current_length - initial_length) / current_length;
         sf::Vector2f correction = delta * 0.5f * difference;
 
+        //if one is pinned the correction doubles
+        if (p1->is_pinned || p2->is_pinned){
+            correction*=2.0f;
+        }
+
         if (!p1->is_pinned) p1->position += correction;
         if (!p2->is_pinned) p2->position -= correction;
     }
